@@ -63,4 +63,4 @@ if ($message != '') {
     <button type="submit">Créer mon compte</button>
 </form>
 
-<?php include 'includes/footer.php'; ?>*
+<?php include 'includes/footer.php'; ?>
