@@ -35,7 +35,8 @@ if (isset($_POST['niveau'])) {
         'niveau' => $niveau,
         'lettres' => $lettresRevelees,
         'vies' => 7,
-        'essais' => 0
+        'essais' => 0,
+        'mot_entier' => false
     );
 
     header('Location: jeu.php');
@@ -49,8 +50,6 @@ if (!isset($_SESSION['partie'])) {
 
 $partie = $_SESSION['partie'];
 $message = '';
-'essais' => 0,
-        'mot_entier' => false
 
 // Le joueur propose une lettre
 if (isset($_POST['lettre'])) {
@@ -74,6 +73,7 @@ if (isset($_POST['lettre'])) {
 
     $_SESSION['partie'] = $partie;
 }
+
 // Le joueur propose un mot entier
 if (isset($_POST['mot'])) {
     $propose = strtoupper(trim($_POST['mot']));
@@ -97,6 +97,7 @@ if (isset($_POST['mot'])) {
 
     $_SESSION['partie'] = $partie;
 }
+
 include 'includes/header.php';
 ?>
 
@@ -123,6 +124,12 @@ if ($message != '') {
         }
     }
     ?>
+</form>
+
+<form method="post" action="jeu.php">
+    <label for="mot">Proposer le mot entier :</label>
+    <input type="text" id="mot" name="mot" required>
+    <button type="submit">Proposer</button>
 </form>
 
 <?php include 'includes/footer.php'; ?>
