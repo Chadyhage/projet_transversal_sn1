@@ -22,3 +22,17 @@ function interdireSiConnecte()
         exit;
     }
 }
+// Affiche le mot avec les lettres trouvées et des _ pour les autres
+// Exemple : CROCODILE avec la lettre O -> _ _ O _ O _ _ _ _
+function motMasque($mot, $lettres)
+{
+    $affichage = '';
+    for ($i = 0; $i < strlen($mot); $i++) {
+        if (in_array($mot[$i], $lettres)) {
+            $affichage = $affichage . $mot[$i] . ' ';
+        } else {
+            $affichage = $affichage . '_ ';
+        }
+    }
+    return $affichage;
+}
