@@ -1,7 +1,7 @@
 <?php
 require_once 'config.php';
 require_once 'includes/fonctions.php';
-
+interdireSiConnecte();
 $message = '';
 
 if (isset($_POST['email'])) {
