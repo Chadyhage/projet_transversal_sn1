@@ -49,6 +49,8 @@ if (!isset($_SESSION['partie'])) {
 
 $partie = $_SESSION['partie'];
 $message = '';
+'essais' => 0,
+        'mot_entier' => false
 
 // Le joueur propose une lettre
 if (isset($_POST['lettre'])) {
@@ -72,7 +74,29 @@ if (isset($_POST['lettre'])) {
 
     $_SESSION['partie'] = $partie;
 }
+// Le joueur propose un mot entier
+if (isset($_POST['mot'])) {
+    $propose = strtoupper(trim($_POST['mot']));
 
+    if (!preg_match('/^[A-Z]+$/', $propose)) {
+        $message = "Le mot doit contenir uniquement des lettres, sans accent ni espace.";
+    } else {
+        $partie['essais'] = $partie['essais'] + 1;
+
+        if ($propose == $partie['mot']) {
+            $partie['mot_entier'] = true;
+            $message = "Bravo, vous avez trouvé le mot !";
+        } else {
+            $partie['vies'] = $partie['vies'] - 2;
+            if ($partie['vies'] < 0) {
+                $partie['vies'] = 0;
+            }
+            $message = $propose . " n'est pas le bon mot. Vous perdez deux vies.";
+        }
+    }
+
+    $_SESSION['partie'] = $partie;
+}
 include 'includes/header.php';
 ?>
 
